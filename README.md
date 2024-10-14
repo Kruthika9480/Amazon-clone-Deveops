@@ -25,13 +25,14 @@ The challenge is to automate the process of deploying the Amazon clone website. 
 - **AMI**: Ubuntu 24.04
 - **Instance Type**: t2.micro
 - **Security Group**: Enable:
-  - HTTP
-  - HTTPS
+  - HTTP (Anywhere)
+  - HTTPS (Anywhere)
   - Custom TCP (8080, Anywhere)
   - Custom TCP (8000, Anywhere)
 - **Action**: Launch the instance.
 
 ### 2. **Connect to the EC2 Instance and Install Required Packages**
+* Install Jenkins,Docker,Nginx
 
 Run the following commands in the terminal after connecting via SSH:
 
@@ -110,15 +111,15 @@ sudo service nginx status
    - **Type**: Freestyle Project
    - **General**: Enable **GitHub Project** and provide the repository URL.
 2. Under **Source Code Management**:
-   - **Repository URL**: `https://github.com/KavitDeepakMehta/AMAZON-CLONE`
+   - **Repository URL**: `https://github.com/Kruthika9480/Amazon-clone-Deveops`
    - **Branch Specifier**: `*/main`
 3. **Build Steps**:  
    Add a build step: **Execute Shell** and enter the following commands:
    
     ```bash
-    sudo docker ps --filter "publish=8000" -q | xargs -r docker rm -f
-    sudo docker build . -t kdm-amazon-clone
-    sudo docker run -p 8000:80 -d kdm-amazon-clone
+    docker ps --filter "publish=8000" -q | xargs -r docker rm -f
+    docker build . -t kdm-amazon-clone
+    docker run -p 8000:80 -d kdm-amazon-clone
     ```
     **NOTE**: Before Clicking Build Now First Make Changes in "sudo visudo"
    #### The sudo visudo command opens and edits the sudoers file, which is a configuration file used by the sudo program to control which users can run commands as root or other users.
@@ -145,7 +146,8 @@ sudo service nginx status
     ```bash
     # Generate SSH keys
     ssh-keygen
-
+    ( Give enter for all)
+    
     # Navigate to the .ssh directory
     cd .ssh
 
@@ -154,6 +156,8 @@ sudo service nginx status
 
     # View public SSH key
     cat ~/.ssh/id_ed25519.pub
+            or
+    cat your file
 
     # View private SSH key (use cautiously)
     cat ~/.ssh/id_ed25519
