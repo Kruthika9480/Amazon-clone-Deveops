@@ -130,6 +130,7 @@ sudo service nginx status
     
     # Add this at the end in the file to allow the Jenkins user to run Docker commands without a password:
     jenkins ALL=(ALL) NOPASSWD: /usr/bin/docker
+   ( give ctrl+o,enter and cntrl+x)
     
     # List running Docker containers again
     sudo docker ps
